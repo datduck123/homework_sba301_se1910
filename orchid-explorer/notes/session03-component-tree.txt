@@ -1,0 +1,35 @@
+# Session 03 — Component Tree & Responsibility Table
+# (Draw this BEFORE coding — Bước 5)
+
+## Component Tree
+
+main.jsx
+ |
+ +-- App                  [root composition]
+      |
+      +-- AppNavbar        [navigation / header]
+      +-- HeroSection      [intro banner + CTA]
+      +-- QuickStats       [3 overview stat cards]
+      +-- OrchidGallery    [6 orchid cards in grid]
+      +-- CareTips         [3 care guidance cards]
+      +-- LearningAlert    [bridge message to Slot 04]
+      +-- AppFooter        [course info + copyright]
+
+## Component Responsibility Table
+
+| Component     | Responsibility              | Parent | Reusable? | Reason                                      |
+|---------------|-----------------------------|--------|-----------|---------------------------------------------|
+| App           | Root composition only       | main   | No        | Glues sections; owns no UI detail           |
+| AppNavbar     | Navigation + brand          | App    | Yes       | Independent; reusable across views later    |
+| HeroSection   | Intro + CTA buttons         | App    | Yes       | Self-contained hero block                   |
+| QuickStats    | 3 overview numbers          | App    | Yes       | Clear single responsibility                 |
+| OrchidGallery | 6 orchid cards in grid      | App    | Yes       | Gallery section; OrchidCard → Slot 04 Props |
+| CareTips      | 3 care guidance cards       | App    | Yes       | Independent content section                 |
+| LearningAlert | Slot 04 bridge message      | App    | Yes       | Feedback/notice UI unit                     |
+| AppFooter     | Course info + copyright     | App    | Yes       | Shared footer, used at app level            |
+
+## Notes
+
+- OrchidGallery has 6 repeated card structures → intentional duplication for Slot 04 Props lesson.
+- No component was created just to wrap a <div>. Every component has a named responsibility.
+- Props / State / Hooks / Router → Learn Later (Slot 04+).

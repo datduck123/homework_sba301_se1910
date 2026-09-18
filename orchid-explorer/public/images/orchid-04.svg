@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#fefce8"/>
+  <circle cx="400" cy="230" r="120" fill="#fde047" opacity="0.9"/>
+  <circle cx="300" cy="195" r="90" fill="#fef08a" opacity="0.85"/>
+  <circle cx="500" cy="195" r="90" fill="#fef08a" opacity="0.85"/>
+  <circle cx="400" cy="315" r="70" fill="#fffde7" opacity="0.8"/>
+  <circle cx="400" cy="240" r="30" fill="#f59e0b"/>
+  <text x="400" y="460" text-anchor="middle" font-family="Georgia, serif" font-size="36" fill="#78350f" font-weight="bold">Golden Sun</text>
+  <text x="400" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#b45309">Oncidium</text>
+</svg>

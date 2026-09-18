@@ -1,0 +1,62 @@
+/* ============================================================
+   app.css — Custom styles for Orchid Explorer
+   Bootstrap handles layout; this file adds project identity.
+   ============================================================ */
+
+/* ---------- Smooth scroll ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Base ---------- */
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+/* ---------- Full-height layout shell ---------- */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ---------- Hero section ---------- */
+.hero-section {
+  background: #fbcfe8;
+  color: #ffffff;
+}
+
+.hero-eyebrow {
+  opacity: 0.75;
+  letter-spacing: 0.08em;
+}
+
+.hero-copy {
+  max-width: 640px;
+  opacity: 0.92;
+}
+
+/* ---------- Orchid card ---------- */
+.orchid-card {
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.orchid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(31, 41, 55, 0.15) !important;
+}
+
+/* Keep card images at a consistent 16:10 ratio */
+.orchid-card img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  width: 100%;
+}

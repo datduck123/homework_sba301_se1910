@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+  <rect width="800" height="520" fill="#fff7ed"/>
+  <circle cx="400" cy="230" r="120" fill="#fb923c" opacity="0.9"/>
+  <circle cx="300" cy="195" r="90" fill="#fdba74" opacity="0.85"/>
+  <circle cx="500" cy="195" r="90" fill="#fdba74" opacity="0.85"/>
+  <circle cx="400" cy="315" r="70" fill="#fed7aa" opacity="0.8"/>
+  <circle cx="400" cy="240" r="30" fill="#dc2626"/>
+  <text x="400" y="460" text-anchor="middle" font-family="Georgia, serif" font-size="36" fill="#7c2d12" font-weight="bold">Amber Wing</text>
+  <text x="400" y="495" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#c2410c">Cattleya</text>
+</svg>
