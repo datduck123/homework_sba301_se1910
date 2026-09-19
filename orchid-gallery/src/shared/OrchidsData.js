@@ -1,0 +1,98 @@
+export const OrchidsData = [
+  {
+    id: "1",
+    orchidName: "Ceasar 4N",
+    origin: "Taiwan",
+    color: "Purple",
+    category: "Dendrobium",
+    isSpecial: true,
+    rating: 4.8,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Famous for vigorous growth and large, striking violet-purple flowers that bloom frequently throughout the year.",
+  },
+  {
+    id: "2",
+    orchidName: "Mini Yaya",
+    origin: "Vietnam",
+    color: "Yellow",
+    category: "Dendrobium",
+    isSpecial: false,
+    rating: 4.5,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Delicate and fragrant miniature yellow orchid well-suited for home gardens and small indoor balconies.",
+  },
+  {
+    id: "3",
+    orchidName: "White Phalaenopsis Grandiflora",
+    origin: "Japan",
+    color: "White",
+    category: "Phalaenopsis",
+    isSpecial: true,
+    rating: 4.9,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Elegant white moth orchid known for its long-lasting and symmetrical cascading blooms.",
+  },
+  {
+    id: "4",
+    orchidName: "Vanda Blue Magic",
+    origin: "Thailand",
+    color: "Blue",
+    category: "Vanda",
+    isSpecial: true,
+    rating: 4.7,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Remarkable royal blue orchid with distinctive tessellated patterns on its rounded sepals and petals.",
+  },
+  {
+    id: "5",
+    orchidName: "Cattleya Queen Sirikhit",
+    origin: "Thailand",
+    color: "White & Gold",
+    category: "Cattleya",
+    isSpecial: false,
+    rating: 4.6,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Fragrant corsage orchid featuring pristine white frilled petals with a vibrant golden-yellow throat.",
+  },
+  {
+    id: "6",
+    orchidName: "Paphiopedilum Callosum",
+    origin: "Vietnam",
+    color: "Green & Maroon",
+    category: "Paphiopedilum",
+    isSpecial: true,
+    rating: 4.8,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Endemic lady slipper orchid boasting a pouch-shaped labellum and dramatic striped dorsal sepal.",
+  },
+  {
+    id: "7",
+    orchidName: "Oncidium Sharry Baby",
+    origin: "Hawaii, USA",
+    color: "Chocolate Brown & Red",
+    category: "Oncidium",
+    isSpecial: false,
+    rating: 4.7,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Famously known as the chocolate orchid due to its sweet vanilla-cocoa aroma and dancing-lady flower sprays.",
+  },
+  {
+    id: "8",
+    orchidName: "Cymbidium Golden Elf",
+    origin: "China",
+    color: "Bright Yellow",
+    category: "Cymbidium",
+    isSpecial: false,
+    rating: 4.4,
+    image: "/images/orchid-placeholder.jpg",
+    description:
+      "Hardy warmth-tolerant boat orchid displaying bright sunshine-yellow fragrant flower spikes.",
+  },
+];

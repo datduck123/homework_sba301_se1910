@@ -1,0 +1,29 @@
+.orchid-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+body {
+  min-width: 320px;
+  background-color: #fcf9f6;
+  color: #1e293b;
+}
+
+.transition-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transition-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(140, 88, 54, 0.15) !important;
+}
+
+.btn-orchid {
+  background-color: #9333ea;
+  border-color: #9333ea;
+}
+
+.btn-orchid:hover, .btn-orchid:focus {
+  background-color: #7e22ce;
+  border-color: #7e22ce;
+}
