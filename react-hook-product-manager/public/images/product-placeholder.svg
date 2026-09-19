@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <!-- Nền da người nhạt ấm áp -->
+    <linearGradient id="skinBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8f3"/>
+      <stop offset="50%" stop-color="#faeee3"/>
+      <stop offset="100%" stop-color="#f4dfd0"/>
+    </linearGradient>
+
+    <!-- Gradient điểm nhấn Product Dashboard -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#4f46e5"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+
+    <!-- Warm soft shadows -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#8c5836" flood-opacity="0.16"/>
+    </filter>
+
+    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#8c5836" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Nền Canvas -->
+  <rect width="800" height="450" fill="url(#skinBgGrad)"/>
+
+  <!-- Vùng sáng highlight nhẹ ấm áp -->
+  <circle cx="120" cy="80" r="160" fill="#fbdcc4" opacity="0.45"/>
+  <circle cx="700" cy="370" r="190" fill="#fce4d4" opacity="0.6"/>
+  <circle cx="400" cy="180" r="180" fill="#ffffff" opacity="0.35"/>
+
+  <!-- ================= TRUNG TÂM: PRODUCT INVENTORY DASHBOARD ================= -->
+  <g transform="translate(400, 160)" filter="url(#softShadow)">
+    <!-- Dashboard Card nền trắng -->
+    <rect x="-110" y="-85" width="220" height="170" rx="20" fill="#ffffff" stroke="#e8d5c4" stroke-width="2"/>
+    
+    <!-- Header Bar -->
+    <path d="M -110,-60 Q -110,-85 -85,-85 L 85,-85 Q 110,-85 110,-60 L 110,-30 L -110,-30 Z" fill="url(#headerGrad)"/>
+    
+    <!-- Móc gắn bảng thống kê -->
+    <rect x="-65" y="-95" width="12" height="22" rx="6" fill="#f8fafc" stroke="#d5bdaf" stroke-width="1.5"/>
+    <rect x="-6" y="-95" width="12" height="22" rx="6" fill="#f8fafc" stroke="#d5bdaf" stroke-width="1.5"/>
+    <rect x="53" y="-95" width="12" height="22" rx="6" fill="#f8fafc" stroke="#d5bdaf" stroke-width="1.5"/>
+
+    <!-- Biểu tượng Hộp sản phẩm (3D Inventory Box) -->
+    <g transform="translate(0, 15)">
+      <!-- Mặt trên hộp -->
+      <polygon points="0,-28 42,-8 0,12 -42,-8" fill="#38bdf8"/>
+      <!-- Mặt trái hộp -->
+      <polygon points="-42,-8 0,12 0,42 -42,22" fill="#0284c7"/>
+      <!-- Mặt phải hộp -->
+      <polygon points="0,12 42,-8 42,22 0,42" fill="#0369a1"/>
+      <!-- Băng keo dán hộp (Seal tape) -->
+      <polygon points="0,-28 12,-22 0,-16 -12,-22" fill="url(#accentGrad)"/>
+      <polygon points="0,12 12,6 12,26 0,32" fill="url(#accentGrad)"/>
+    </g>
+  </g>
+
+  <!-- ================= 4 HUY HIỆU CHỦ ĐỀ SẢN PHẨM ================= -->
+
+  <!-- 1. Phụ kiện / Accessories (Keyboard / Mouse) -->
+  <g transform="translate(160, 145)" filter="url(#badgeShadow)">
+    <rect x="-70" y="-24" width="140" height="48" rx="24" fill="#ffffff" stroke="#0284c7" stroke-width="1.8"/>
+    <!-- Icon Keyboard -->
+    <rect x="-48" y="-8" width="22" height="16" rx="3" fill="none" stroke="#0284c7" stroke-width="2"/>
+    <line x1="-44" y1="-3" x2="-42" y2="-3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-38" y1="-3" x2="-36" y2="-3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-32" y1="-3" x2="-30" y2="-3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-42" y1="3" x2="-32" y2="3" stroke="#0284c7" stroke-width="2" stroke-linecap="round"/>
+    <!-- Detail text lines -->
+    <rect x="-14" y="-7" width="55" height="5" rx="2.5" fill="#334155"/>
+    <rect x="-14" y="3" width="36" height="5" rx="2.5" fill="#0284c7"/>
+  </g>
+
+  <!-- 2. Màn hình / Display (Monitor Icon) -->
+  <g transform="translate(640, 145)" filter="url(#badgeShadow)">
+    <rect x="-70" y="-24" width="140" height="48" rx="24" fill="#ffffff" stroke="#8b5cf6" stroke-width="1.8"/>
+    <!-- Icon Monitor -->
+    <rect x="-48" y="-9" width="22" height="15" rx="2" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+    <line x1="-37" y1="6" x2="-37" y2="10" stroke="#8b5cf6" stroke-width="2"/>
+    <line x1="-42" y1="10" x2="-32" y2="10" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/>
+    <rect x="-14" y="-7" width="55" height="5" rx="2.5" fill="#334155"/>
+    <rect x="-14" y="3" width="36" height="5" rx="2.5" fill="#8b5cf6"/>
+  </g>
+
+  <!-- 3. Kết nối / Connectivity (USB-C Hub) -->
+  <g transform="translate(230, 250)" filter="url(#badgeShadow)">
+    <rect x="-65" y="-20" width="130" height="40" rx="20" fill="#ffffff" stroke="#10b981" stroke-width="1.6"/>
+    <!-- Icon Hub/Plug -->
+    <rect x="-46" y="-6" width="16" height="12" rx="3" fill="none" stroke="#10b981" stroke-width="2"/>
+    <line x1="-30" y1="0" x2="-24" y2="0" stroke="#10b981" stroke-width="2"/>
+    <rect x="-14" y="-5" width="48" height="4" rx="2" fill="#10b981"/>
+    <rect x="-14" y="3" width="30" height="4" rx="2" fill="#64748b"/>
+  </g>
+
+  <!-- 4. Không gian làm việc / Workspace (Laptop Stand) -->
+  <g transform="translate(570, 250)" filter="url(#badgeShadow)">
+    <rect x="-65" y="-20" width="130" height="40" rx="20" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+    <!-- Icon Laptop Stand -->
+    <line x1="-46" y1="6" x2="-32" y2="-6" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-32" y1="-6" x2="-28" y2="-6" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-48" y1="6" x2="-28" y2="6" stroke="#ea580c" stroke-width="2" stroke-linecap="round"/>
+    <rect x="-14" y="-5" width="48" height="4" rx="2" fill="#ea580c"/>
+    <rect x="-14" y="3" width="30" height="4" rx="2" fill="#64748b"/>
+  </g>
+
+  <!-- ================= BANNER ĐIỂM NHẤN: REACT HOOKS ================= -->
+  <g transform="translate(400, 315)">
+    <polygon points="0,-10 3,-3 10,-3 4,2 6,9 0,5 -6,9 -4,2 -10,-3 -3,-3" fill="url(#accentGrad)"/>
+    <circle cx="-50" cy="0" r="3" fill="#0284c7"/>
+    <circle cx="-25" cy="0" r="2" fill="#94a3b8"/>
+    <circle cx="25" cy="0" r="2" fill="#94a3b8"/>
+    <circle cx="50" cy="0" r="3" fill="#8b5cf6"/>
+  </g>
+
+  <g transform="translate(400, 355)" filter="url(#badgeShadow)">
+    <rect x="-170" y="-22" width="340" height="44" rx="22" fill="#ffffff" stroke="#ebd9cc" stroke-width="1.5"/>
+    <circle cx="-135" cy="0" r="7" fill="#0284c7"/>
+    <rect x="-115" y="-7" width="105" height="14" rx="4" fill="#faeee3"/>
+    <rect x="-110" y="-4" width="95" height="8" rx="2" fill="#0284c7"/>
+    <rect x="5" y="-7" width="60" height="14" rx="4" fill="#ea580c"/>
+    <circle cx="105" cy="-2" r="5" fill="#f59e0b"/>
+    <path d="M 105,3 L 105,9" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="135" cy="0" r="7" fill="#8b5cf6"/>
+  </g>
+
+  <!-- Vạch điểm nhấn chân ảnh -->
+  <rect x="330" y="400" width="140" height="5" rx="2.5" fill="url(#headerGrad)"/>
+</svg>
