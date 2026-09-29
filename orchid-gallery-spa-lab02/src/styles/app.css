@@ -1,0 +1,30 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #fcf9f6;
+  color: #212529;
+}
+
+body {
+  margin: 0;
+  background: #fcf9f6;
+  color: #212529;
+}
+
+.orchid-card-img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.orchid-card {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.transition-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.transition-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.5rem 1rem rgba(140, 88, 54, 0.15) !important;
+}
