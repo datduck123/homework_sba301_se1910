@@ -44,7 +44,7 @@ public class OrchidService implements IOrchidService {
         current.setOrchidName(input.getOrchidName());
         current.setNatural(input.isNatural());
         current.setOrchidDescription(input.getOrchidDescription());
-        current.setOrchidCategory(input.getOrchidCategory());
+        current.setCategory(input.getCategory());
         current.setAttractive(input.isAttractive());
         current.setOrchidURL(input.getOrchidURL());
 

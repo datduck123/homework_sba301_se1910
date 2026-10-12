@@ -18,26 +18,26 @@ public class OrchidController {
         this.service = service;
     }
 
-    @GetMapping({"/"})
+    @GetMapping({"", "/"})
     public ResponseEntity<List<Orchid>> fetchAll() {
         return ResponseEntity.ok(service.getAllOrchids());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Orchid> getById(@PathVariable int id) {
+    public ResponseEntity<Orchid> getById(@PathVariable("id") int id) {
         return service.getOrchidByID(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping({"/"})
+    @PostMapping({"", "/"})
     public ResponseEntity<Orchid> saveOrchid(@RequestBody Orchid orchid) {
         Orchid created = service.insertOrchid(orchid);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Orchid> updateOrchid(@PathVariable int id, @RequestBody Orchid orchid) {
+    public ResponseEntity<Orchid> updateOrchid(@PathVariable("id") int id, @RequestBody Orchid orchid) {
         try {
             return ResponseEntity.ok(service.updateOrchid(id, orchid));
         } catch (IllegalArgumentException ex) {
@@ -46,7 +46,7 @@ public class OrchidController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrchid(@PathVariable int id) {
+    public ResponseEntity<Void> deleteOrchid(@PathVariable("id") int id) {
         if (!service.deleteOrchid(id)) {
             return ResponseEntity.notFound().build();
         }

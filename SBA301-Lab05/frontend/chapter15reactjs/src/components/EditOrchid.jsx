@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { createOrchid, getOrchid, updateOrchid } from "../services/orchidApi";
+import { getCategories } from "../services/categoryApi";
 import { Card, Form, Button, Alert, Row, Col } from "react-bootstrap";
 
 const emptyForm = {
   orchidName: "",
   isNatural: false,
   orchidDescription: "",
-  orchidCategory: "",
+  category: null,
   isAttractive: false,
   orchidURL: ""
 };
@@ -16,8 +17,19 @@ export default function EditOrchid({ createMode = false }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState(emptyForm);
+  const [categories, setCategories] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    getCategories()
+      .then((r) => {
+        console.log("Categories response:", r);
+        console.log("Categories data:", r.data);
+        setCategories(r.data);
+      })
+      .catch((e) => console.error("Failed to load categories", e));
+  }, []);
 
   useEffect(() => {
     if (!createMode && id) {
@@ -28,7 +40,7 @@ export default function EditOrchid({ createMode = false }) {
             orchidName: r.data.orchidName || "",
             isNatural: Boolean(r.data.isNatural),
             orchidDescription: r.data.orchidDescription || "",
-            orchidCategory: r.data.orchidCategory || "",
+            category: r.data.category || null,
             isAttractive: Boolean(r.data.isAttractive),
             orchidURL: r.data.orchidURL || ""
           });
@@ -42,10 +54,15 @@ export default function EditOrchid({ createMode = false }) {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm((f) => ({
-      ...f,
-      [name]: type === "checkbox" ? checked : value
-    }));
+    if (name === "category") {
+      const selectedCategory = categories.find(c => String(c.categoryId) === String(value)) || null;
+      setForm((f) => ({ ...f, category: selectedCategory }));
+    } else {
+      setForm((f) => ({
+        ...f,
+        [name]: type === "checkbox" ? checked : value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -85,12 +102,25 @@ export default function EditOrchid({ createMode = false }) {
 
           <Form.Group className="mb-3">
             <Form.Label className="fw-semibold">Category</Form.Label>
-            <Form.Control
-              name="orchidCategory"
-              value={form.orchidCategory}
+            <Form.Select
+              name="category"
+              value={form.category?.categoryId || ""}
               onChange={handleChange}
-              placeholder="e.g. Dendrobium, Cattleya, Vanda..."
-            />
+            >
+              <option value="">Select a category...</option>
+              {categories && categories.length > 0 ? (
+                categories.map((cat) => (
+                  <option key={cat.categoryId} value={cat.categoryId}>
+                    {cat.categoryName}
+                  </option>
+                ))
+              ) : (
+                <option disabled>No categories available</option>
+              )}
+            </Form.Select>
+            {categories.length === 0 && (
+              <small className="text-muted">Loading categories...</small>
+            )}
           </Form.Group>
 
           <Form.Group className="mb-3">

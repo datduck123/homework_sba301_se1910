@@ -90,7 +90,7 @@ export default function ListOfOrchids() {
                   />
                 </td>
                 <td className="fw-bold">{o.orchidName}</td>
-                <td><Badge bg="secondary">{o.orchidCategory || "N/A"}</Badge></td>
+                <td><Badge bg="secondary">{o.category?.categoryName || "N/A"}</Badge></td>
                 <td>
                   <Badge bg={o.isNatural ? "success" : "light"} text={o.isNatural ? "white" : "dark"}>
                     {o.isNatural ? "Natural" : "Hybrid"}

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Orchid")
+@Table(name = "Orchids")
 public class Orchid {
 
     @Id
@@ -22,8 +22,10 @@ public class Orchid {
     @Column(name = "orchid_description", length = 1000)
     private String orchidDescription;
 
-    @Column(name = "orchid_category", length = 100)
-    private String orchidCategory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    @JsonProperty("category")
+    private OrchidCategory category;
 
     @Column(name = "is_attractive")
     @JsonProperty("isAttractive")
@@ -35,11 +37,11 @@ public class Orchid {
     public Orchid() {}
 
     public Orchid(String orchidName, boolean isNatural, String orchidDescription,
-                  String orchidCategory, boolean isAttractive, String orchidURL) {
+                  OrchidCategory category, boolean isAttractive, String orchidURL) {
         this.orchidName = orchidName;
         this.isNatural = isNatural;
         this.orchidDescription = orchidDescription;
-        this.orchidCategory = orchidCategory;
+        this.category = category;
         this.isAttractive = isAttractive;
         this.orchidURL = orchidURL;
     }
@@ -76,12 +78,12 @@ public class Orchid {
         this.orchidDescription = orchidDescription;
     }
 
-    public String getOrchidCategory() {
-        return orchidCategory;
+    public OrchidCategory getCategory() {
+        return category;
     }
 
-    public void setOrchidCategory(String orchidCategory) {
-        this.orchidCategory = orchidCategory;
+    public void setCategory(OrchidCategory category) {
+        this.category = category;
     }
 
     public boolean isAttractive() {
