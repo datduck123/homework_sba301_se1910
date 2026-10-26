@@ -1,0 +1,507 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Book Library | User Detail - Admin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/transitions.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/color.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <style>
+        .status-badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .info-row {
+            font-size: 15px;
+            padding: 6px 0;
+            margin-bottom: 14px;
+            min-height: 34px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header id="tg-header" class="tg-header tg-haslayout">
+    <div class="tg-topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="tg-userlogin">
+                        <div>
+                            <li style="list-style:none;" class="menu-item-has-children"
+                                sec:authorize="isAuthenticated()">
+                                <a href="">
+                                    <i id="user_icon" class="fa fa-user"></i> Welcome
+                                    <span th:if="${currentUserName != null}" th:text="${currentUserName}"></span>
+                                    <span class="sr-only"></span>
+                                </a>
+                                <div class="mega-menu user">
+                                    <ul class="tg-themetabnav" role="tablist">
+                                        <li><a th:href="@{/profile}">Profile<span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li sec:authorize="hasRole('USER')">
+                                            <a th:href="@{/orders}">Orders<span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li><a class="tg-userlogout" th:href="@{/logout}">Logout<span class="sr-only">(current)</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <br>
+                            <a class="nav-link text" th:href="@{/signup}" style="margin-right: 30px"
+                               sec:authorize="!isAuthenticated()">Sign up<span class="sr-only">(current)</span></a>
+                            <a class="nav-link text" th:href="@{/login}"
+                               sec:authorize="!isAuthenticated()">Login<span class="sr-only">(current)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-middlecontainer" style="padding: 10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <strong class="tg-logo"><a href="/"><img src="/images/logoSWP.png"
+                                                             alt="company name here"></a></strong>
+                    <div class="tg-wishlistandcart">
+                        <div sec:authorize="hasRole('USER')" class="dropdown tg-themedropdown tg-minicartdropdown">
+                            <a id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <span class="tg-themebadge"
+                                      th:text="${cartTotalBooks != null ? cartTotalBooks : 0}"></span>
+                                <a th:href="@{view-cart}"><i class="icon-cart"></i>
+                                    <span style="margin-left: 10px;">Cart</span></a>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tg-navigationarea">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <nav id="tg-nav" class="tg-nav">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#tg-navigation" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
+                            <ul>
+                                <li><a th:href="@{/}">Home</a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-product}">Books</a>
+                                </li>
+                                <li sec:authorize="hasRole('ADMIN')"><a
+                                        th:href="@{/admin/manage-category}">Categories</a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-author}">Authors</a>
+                                </li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-user}">Users</a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-order}">Orders</a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a
+                                        th:href="@{/admin/manage-promotion}">Promotions</a></li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/statistic}">Statistics</a>
+                                </li>
+                                <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-staff}">Staff</a></li>
+                                <li class="menu-item-has-children" sec:authorize="hasRole('ADMIN')">
+                                    <a href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+                                    <div class="mega-menu">
+                                        <ul>
+                                            <li><a th:href="@{/admin/manage-series}"><i class="fa fa-book"></i>
+                                                Series</a></li>
+                                            <li><a th:href="@{/admin/manage-language}"><i class="fa fa-flag"></i>
+                                                Language</a></li>
+                                            <li><a th:href="@{/admin/manage-publisher}"><i class="fa fa-briefcase"></i>
+                                                Publisher</a></li>
+                                            <li><a th:href="@{/admin/manage-translator}"><i class="fa fa-users"></i>
+                                                Translator</a></li>
+                                            <li><a th:href="@{/admin/manage-comment}"><i class="fa fa-comments"></i>
+                                                Reviews</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ============================= HEADER END ============================= -->
+
+<!-- ============================= BANNER ============================= -->
+<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" data-z-index="-100"
+     data-appear-top-offset="600" data-parallax="scroll"
+     data-image-src="../images/parallax/bgparallax-07.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="tg-innerbannercontent">
+                    <h1 style="margin-bottom: 20px;"
+                        th:text="${editMode} ? 'Edit Customer' : 'Customer Details'">Customer Details</h1>
+                    <ol class="tg-breadcrumb">
+                        <li><a th:href="@{/admin/manage-user}">Users</a></li>
+                        <li class="tg-active" th:text="${editMode} ? 'Edit' : 'Details'">Details</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================= MAIN ============================= -->
+<main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-sectionspace tg-haslayout">
+        <div class="container">
+
+            <!-- ==================== VIEW MODE ==================== -->
+            <div th:if="${editMode == null or !editMode}" style="margin-top: 30px;">
+                <div class="row">
+
+                    <!-- Personal Information -->
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                        <h2>Personal Information</h2>
+
+                        <div class="info-row">
+                            <span class="info-label">Full name:</span>
+                            <span class="info-value" th:text="${user.name}">Emma Dasha</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value" th:text="${user.account.email}">—</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">Phone:</span>
+                            <span class="info-value" th:text="${user.phone}">—</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">Address:</span>
+                            <span class="info-value" th:text="${user.address}">—</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-label">Status:</span>
+                            <span th:text="${user.account.status}"
+                                  th:class="${user.account.status == 'ACTIVE'} ?
+                                    'info-value status-badge status-active' :
+                                     'info-value status-badge status-inactive'">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Account Information -->
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
+                        <h2>Account Information</h2>
+
+                        <div class="info-row">
+                            <span class="info-label">Username:</span>
+                            <span class="info-value" th:text="${user.account.username}">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div style="margin-top: 30px; display: flex; gap: 10px;">
+                    <a th:href="@{/admin/manage-user}" class="btn btn-default">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+
+            <!-- ==================== EDIT MODE ==================== -->
+            <div th:if="${editMode}">
+                <form id="form" th:object="${user}" th:action="@{/admin/save-user-ad}" method="post">
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="row" style="margin-top: 30px;">
+
+                        <!-- Personal Information -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5">
+                            <h2>Personal Information</h2>
+
+                            <div class="form-group">
+                                <label for="name">
+                                    <span style="color: red;">*</span><strong>Full name</strong>
+                                </label>
+                                <input type="text" th:field="*{name}" class="form-control"
+                                       style="width: 100%;" id="name" name="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">
+                                    <span style="color: red;">*</span><strong>Email</strong>
+                                </label>
+                                <input type="text" th:value="*{account.email}" name="email"
+                                       class="form-control" style="width: 100%;" id="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">
+                                    <span style="color: red;">*</span><strong>Phone number</strong>
+                                </label>
+                                <input type="text" th:field="*{phone}" class="form-control"
+                                       style="width: 100%;" id="phone" name="phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">
+                                    <span style="color: red;">*</span><strong>Address</strong>
+                                </label>
+                                <input type="text" th:field="*{address}" class="form-control"
+                                       style="width: 100%;" id="address" name="address">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="accountStatus"> <span
+                                        style="color: red;">*</span><strong>Status</strong></label>
+                                <select id="accountStatus" name="accountStatus"
+                                        class="form-control" style="width: 100%;">
+                                    <option value="ACTIVE"
+                                            th:selected="${user.account.status == 'ACTIVE'}">ACTIVE
+                                    </option>
+                                    <option value="INACTIVE"
+                                            th:selected="${user.account.status == 'INACTIVE'}"
+                                            th:disabled="${activeOrders > 0}">INACTIVE
+                                    </option>
+                                </select>
+                                <small th:if="${activeOrders > 0}" class="text-danger">
+                                    <i class="fa fa-warning"></i>
+                                    Cannot set INACTIVE: user has
+                                    <strong th:text="${activeOrders}"></strong> active order(s).
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Account Information -->
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
+                            <h2>Account Information</h2>
+
+                            <div class="form-group">
+                                <label for="username">
+                                    <span style="color: red;">*</span><strong>Username</strong>
+                                </label>
+                                <input type="text" th:value="*{account.username}" class="form-control"
+                                       style="width: 100%;" id="username" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div style="margin-top: 30px; display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+                        <a th:href="@{/admin/manage-user}" class="btn btn-default">
+                            Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer id="tg-footer" class="tg-footer tg-haslayout">
+    <div class="tg-footerarea">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="tg-clientservices">
+                        <li class="tg-devlivery">
+                            <span class="tg-clientserviceicon"><i class="icon-rocket"></i></span>
+                            <div class="tg-titlesubtitle">
+                                <h3>Delivery</h3>
+                                <p>Fast nationwide delivery</p>
+                            </div>
+                        </li>
+                        <li class="tg-discount">
+                            <span class="tg-clientserviceicon"><i class="icon-tag"></i></span>
+                            <div class="tg-titlesubtitle">
+                                <h3>Pricing</h3>
+                                <p>Attractive and reasonable</p>
+                            </div>
+                        </li>
+                        <li class="tg-quality">
+                            <span class="tg-clientserviceicon"><i class="icon-leaf"></i></span>
+                            <div class="tg-titlesubtitle">
+                                <h3>Quality</h3>
+                                <p>Top quality products</p>
+                            </div>
+                        </li>
+                        <li class="tg-support">
+                            <span class="tg-clientserviceicon"><i class="icon-heart"></i></span>
+                            <div class="tg-titlesubtitle">
+                                <h3>24/7 Support</h3>
+                                <p>Serving you at any time</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tg-threecolumns">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="tg-footercol">
+                            <strong class="tg-logo">
+                                <a href="javascript:void(0);"><img src="../images/flogo.png"
+                                                                   alt="image description"></a>
+                            </strong>
+                            <ul class="tg-contactinfo">
+                                <li>
+                                    <i class="icon-apartment"></i>
+                                    <address>Ha Dong, Hanoi, Vietnam</address>
+                                </li>
+                                <li>
+                                    <i class="icon-phone-handset"></i>
+                                    <span>
+                                        <em>0812 567 889</em>
+                                        <em>+84 1245 6767</em>
+                                    </span>
+                                </li>
+                                <li>
+                                    <i class="icon-clock"></i>
+                                    <span>Serving 7 days a week from 9:00 - 22:00</span>
+                                </li>
+                            </ul>
+                            <ul class="tg-socialicons">
+                                <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a>
+                                </li>
+                                <li class="tg-googleplus"><a href="javascript:void(0);"><i
+                                        class="fa fa-google-plus"></i></a></li>
+                                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                        <div class="tg-footercol tg-widget tg-widgetnavigation">
+                            <div class="tg-widgettitle">
+                                <h3>We guarantee</h3>
+                            </div>
+                            <div class="tg-widgetcontent">
+                                <ul>
+                                    <li><a href="javascript:void(0);">Always respect customers</a></li>
+                                    <li><a href="javascript:void(0);">Confidentiality of necessary information</a></li>
+                                    <li><a href="javascript:void(0);">Genuine books</a></li>
+                                    <li><a href="javascript:void(0);">Comply with purchase and sale regulations</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tg-footerbar">
+        <a id="tg-btnbacktotop" class="tg-btnbacktotop" href="javascript:void(0);"><i class="icon-chevron-up"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <span class="tg-paymenttype"><img src="../images/paymenticon.png" alt="image description"></span>
+                    <span class="tg-copyright">2023 All Rights Reserved By &copy; Book Library</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================= SCRIPTS ============================= -->
+<script src="../js/vendor/jquery-library.js"></script>
+<script src="../js/vendor/bootstrap.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/jquery.vide.min.js"></script>
+<script src="../js/countdown.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script src="../js/parallax.js"></script>
+<script src="../js/countTo.js"></script>
+<script src="../js/appear.js"></script>
+<script src="../js/gmap3.js"></script>
+<script src="../js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../js/profile_validation.js"></script>
+
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var successMessage = /*[[${successMessage}]]*/ null;
+    var errorMessage = /*[[${errorMessage}]]*/ null;
+
+    $(document).ready(function () {
+        if (successMessage) {
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: successMessage,
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+        }
+        if (errorMessage) {
+            Swal.fire({
+                position: 'top',
+                icon: 'error',
+                title: errorMessage,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        }
+    });
+    /*]]>*/
+</script>
+
+</body>
+</html>
